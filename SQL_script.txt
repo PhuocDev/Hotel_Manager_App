@@ -1,0 +1,44 @@
+CREATE DATABASE JDBC_Assignment
+USE JDBC_Assignment
+Create Table userAccount (
+    userID char(5) primary key not null,
+    hoTen char(20),
+    username char(20),
+    password char(20),
+)
+Create table role(
+    userID char(5) FOREIGN KEY REFERENCES userAccount(userID),
+    role char(20)
+)
+
+Create table room(
+    roomID char(5) primary key not null,
+    loaiPhong char(20),
+    status char(20),
+)
+create table booking(
+    accountID char(5) FOREIGN KEY REFERENCES userAccount(userID),
+    roomID char(5)  FOREIGN KEY REFERENCES room(roomID),
+    ngayBook date,
+)
+
+insert into room VALUES ('ro001', '2 nguoi', 'empty' )
+insert into room VALUES ('ro002', '4 nguoi', 'empty' )
+insert into room VALUES ('ro003', '3 nguoi', 'booked' )
+
+insert into booking VALUES ('cu001', 'ro003', '01/01/2022')
+insert into booking VALUES ('cu001', 'ro003', '12/14/2022')
+
+insert into userAccount VALUES('ad001', 'Bui Phuoc', 'admin', 'admin')
+insert into userAccount VALUES ('nv001', 'Nguyen Van Anh', 'nv001', 'nv001')
+INSERT into userAccount VALUES ('cu001', 'Le Van Viet', 'cu001', 'cu001')
+
+insert into role VALUES('ad001', 'admin')
+insert into role VALUES('nv001', 'clerk')
+INSERT into role VALUES('cu001', 'customer')
+
+
+select * from booking
+select * from userAccount
+SELECT * from role
+SELECT * from room where status = 'empty'
